@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts Bluesky</title>
+    <title>Bluesky Posts</title>
 </head>
 <body>
-    <h1>Posts des comptes suivis</h1>
-    {% for post in posts %}
-        <div>
-            <h2>{{ post['author'] }}</h2>
-            <p>{{ post['content'] }}</p>
-            <small>{{ post['created_at'] }}</small>
-        </div>
-        <hr>
-    {% endfor %}
+    <h1>Bluesky Posts</h1>
+
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <strong>{{ post.post.author.handle }} :</strong> {{ post.post.record.text }}
+                    <br>
+                    <em>Publié le {{ post.post_time.strftime('%Y-%m-%d %H:%M:%S') }}</em>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun post à afficher.</p>
+    {% endif %}
 </body>
 </html>
